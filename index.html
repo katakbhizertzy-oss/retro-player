@@ -164,7 +164,7 @@ function start(url,name,core){
   window.EJS_gameName=name.replace(/\.[^.]+$/,''); window.EJS_pathtodata=BASE;
   window.EJS_startOnLoaded=true; window.EJS_color='#ffcf33'; window.EJS_language='id';
   var s=document.createElement('script'); s.src=BASE+'loader.js';
-  s.onerror=function(){ $('stage').style.display='none'; $('home').style.display='block'; $('err').textContent='Emulator lokal tidak ditemukan. Jalankan sh setup-offline.sh di Termux, lalu unggah folder emulatorjs ke GitHub.'; };
+  s.onerror=function(){ var CDN='https://cdn.emulatorjs.org/stable/data/'; window.EJS_pathtodata=CDN; var s2=document.createElement('script'); s2.src=CDN+'loader.js'; s2.onerror=function(){ $('stage').style.display='none'; $('home').style.display='block'; $('err').textContent='Emulator tidak bisa dimuat (lokal dan CDN). Cek internet.'; }; document.body.appendChild(s2); };
   document.body.appendChild(s);
   }
 }
